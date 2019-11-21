@@ -10,7 +10,8 @@ fun main() {
 //    readList()
 //    readList2()
 //    function(1, 2)
-    woman().work()
+//    woman().work()
+    world.checkAge(19)
 }
 
 
@@ -241,12 +242,15 @@ class child(name: String) : parent(name) {
  */
 
 interface IHuman {
+    var name:String
+    var age:Int
+    
     fun voice()
 
     fun work()
 }
 
-class man : IHuman {
+class man(override var name: String, override var age: Int) : IHuman {
     override fun voice() {
         println("man voice")
     }
@@ -259,10 +263,21 @@ class man : IHuman {
 /**
  * 代理,必须要要代理给一个实例
  */
-class woman : IHuman by man() {
+class woman(override var name: String, override var age: Int) : IHuman by man(name,age) {
     override fun voice() {
         println("woman voice")
     }
 }
 
+/**
+ * 扩展函数
+ */
 
+var world = listOf<IHuman>(man("man",20), 
+    man("bigman",30),
+    man("smallman",10),
+    woman("woman",18))
+
+fun List<IHuman>.checkAge(age:Int){
+    filter { it.age>age }.forEach { println("大于此年龄的人叫 ${it.name}") }
+}
