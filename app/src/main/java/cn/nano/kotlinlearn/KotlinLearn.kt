@@ -281,3 +281,5 @@ var world = listOf<IHuman>(man("man",20),
 fun List<IHuman>.checkAge(age:Int){
     filter { it.age>age }.forEach { println("大于此年龄的人叫 ${it.name}") }
 }
+
+
